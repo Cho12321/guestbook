@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             agent { label 'agent1' }
             steps {
-                git branch: 'master', url:'https://github.com/jyj0105/guestbook.git'
+                git branch: 'master', url:'https://github.com/cho12321/guestbook.git'
             }
         }
         stage('Build') {
