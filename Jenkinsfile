@@ -1,4 +1,4 @@
-mport java.text.SimpleDateFormat
+import java.text.SimpleDateFormat
 
 def TODAY = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())
 
@@ -6,14 +6,14 @@ pipeline {
     agent { label 'master' }
     environment {
         strDockerTag = "${TODAY}_${BUILD_ID}"
-        strDockerImage ="yu3papa/cicd_guestbook:${strDockerTag}"
+        strDockerImage ="jyj0105/cicd_guestbook:${strDockerTag}"
     }
 
     stages {
         stage('Checkout') {
             agent { label 'agent1' }
             steps {
-                git branch: 'master', url:'https://github.com/yu3papa/guestbook.git'
+                git branch: 'master', url:'https://github.com/jyj0105/guestbook.git'
             }
         }
         stage('Build') {
@@ -73,7 +73,7 @@ pipeline {
         stage('Docker Image Build') {
             agent { label 'agent2' }
             steps {
-                git branch: 'master', url:'https://github.com/yu3papa/guestbook.git'
+                git branch: 'master', url:'https://github.com/jyj0105/guestbook.git'
                 sh './mvnw clean package'
                 script {
                     //oDockImage = docker.build(strDockerImage)
